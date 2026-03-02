@@ -8,8 +8,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Didot via Google Fonts (usando Bodoni como alternativa) -->
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Calibri Light via sistema -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
@@ -23,7 +23,7 @@
             --gold-dark: #8a6a46;
             --charcoal: #1a1a1a;
             --warm-gray: #6b6560;
-            --font-didone: 'Bodoni Moda', 'Didot', 'Bodoni 72', serif;
+            --font-calibri: 'Calibri Light', 'Calibri', 'Segoe UI', sans-serif;
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Montserrat', sans-serif;
         }
@@ -65,7 +65,7 @@
             position: relative;
         }
 
-        /* ── LOGO ESTILIZADO (fonte Didot/Bodoni) ── */
+        /* ── LOGO ESTILIZADO (Calibri Light) ── */
         .logo-container {
             display: flex;
             flex-direction: column;
@@ -81,15 +81,14 @@
         }
 
         .logo-name {
-            font-family: var(--font-didone);
+            font-family: var(--font-calibri);
             font-size: 48px;
-            font-weight: 400;
+            font-weight: 300;
             letter-spacing: 8px;
             color: #ffffff;
-            line-height: 1;
-            margin-bottom: 6px;
+            line-height: 1.1;
+            margin-bottom: 4px;
             text-transform: uppercase;
-            font-feature-settings: "liga" off;
         }
 
         .logo-bottom {
@@ -105,13 +104,12 @@
         }
 
         .logo-subtitle {
-            font-family: var(--font-didone);
+            font-family: var(--font-calibri);
             font-size: 20px;
-            font-weight: 350;
+            font-weight: 300;
             letter-spacing: 5px;
             color: #d4b896;
             text-transform: uppercase;
-            font-feature-settings: "liga" off;
         }
 
         .logo-bottom-line.right {
@@ -558,13 +556,13 @@
         }
 
         .footer-logo-name {
-            font-family: var(--font-didone);
+            font-family: var(--font-calibri);
             font-size: 42px;
-            font-weight: 400;
+            font-weight: 300;
             letter-spacing: 8px;
             color: #ffffff;
-            line-height: 1;
-            margin-bottom: 6px;
+            line-height: 1.1;
+            margin-bottom: 4px;
             text-transform: uppercase;
         }
 
@@ -581,9 +579,9 @@
         }
 
         .footer-logo-subtitle {
-            font-family: var(--font-didone);
+            font-family: var(--font-calibri);
             font-size: 18px;
-            font-weight: 350;
+            font-weight: 300;
             letter-spacing: 5px;
             color: #d4b896;
             text-transform: uppercase;
@@ -750,7 +748,7 @@
 
 <body>
 
-    <!-- HEADER — faixa preta com logo estilizado (fonte Didot) -->
+    <!-- HEADER — faixa preta com logo estilizado (Calibri Light) -->
     <header class="site-header" id="header">
         <div class="header-container">
             <div class="logo-container">
@@ -951,4 +949,12 @@
         // Header scroll
         const siteHeader = document.getElementById('header');
         if (siteHeader) {
-            window.addEventListener('scroll',
+            window.addEventListener('scroll', () => {
+                siteHeader.classList.toggle('scrolled', window.scrollY > 60);
+            });
+        }
+
+    });
+    </script>
+</body>
+</html>
