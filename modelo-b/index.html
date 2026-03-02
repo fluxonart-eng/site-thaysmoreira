@@ -8,7 +8,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Didot via Google Fonts (usando Bodoni como alternativa) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
@@ -22,6 +23,7 @@
             --gold-dark: #8a6a46;
             --charcoal: #1a1a1a;
             --warm-gray: #6b6560;
+            --font-didone: 'Bodoni Moda', 'Didot', 'Bodoni 72', serif;
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Montserrat', sans-serif;
         }
@@ -45,12 +47,12 @@
             z-index: 100;
             background: #111111;
             border-bottom: 1px solid rgba(184,150,110,0.2);
-            padding: 24px 48px;
+            padding: 28px 48px;
             transition: padding 0.4s ease, box-shadow 0.4s ease;
         }
 
         .site-header.scrolled {
-            padding: 16px 48px;
+            padding: 18px 48px;
             box-shadow: 0 4px 32px rgba(0,0,0,0.5);
         }
 
@@ -63,7 +65,7 @@
             position: relative;
         }
 
-        /* ── LOGO ESTILIZADO (recriado em CSS) ── */
+        /* ── LOGO ESTILIZADO (fonte Didot/Bodoni) ── */
         .logo-container {
             display: flex;
             flex-direction: column;
@@ -72,64 +74,68 @@
         }
 
         .logo-top-line {
-            width: 40px;
+            width: 45px;
             height: 1px;
             background: var(--gold);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .logo-name {
-            font-family: var(--font-serif);
-            font-size: 42px;
-            font-weight: 300;
-            letter-spacing: 6px;
+            font-family: var(--font-didone);
+            font-size: 48px;
+            font-weight: 400;
+            letter-spacing: 8px;
             color: #ffffff;
             line-height: 1;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             text-transform: uppercase;
+            font-feature-settings: "liga" off;
         }
 
         .logo-bottom {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .logo-bottom-line {
-            width: 30px;
+            width: 35px;
             height: 1px;
             background: var(--gold);
         }
 
         .logo-subtitle {
-            font-family: var(--font-serif);
-            font-size: 18px;
-            font-weight: 300;
-            letter-spacing: 4px;
+            font-family: var(--font-didone);
+            font-size: 20px;
+            font-weight: 350;
+            letter-spacing: 5px;
             color: #d4b896;
             text-transform: uppercase;
+            font-feature-settings: "liga" off;
         }
 
         .logo-bottom-line.right {
-            width: 30px;
+            width: 35px;
             height: 1px;
             background: var(--gold);
         }
 
         .site-header.scrolled .logo-name {
-            font-size: 36px;
+            font-size: 40px;
+            letter-spacing: 7px;
         }
 
         .site-header.scrolled .logo-subtitle {
-            font-size: 16px;
+            font-size: 18px;
+            letter-spacing: 4px;
         }
 
         .site-header.scrolled .logo-top-line {
-            width: 35px;
+            width: 40px;
         }
 
         .site-header.scrolled .logo-bottom-line {
-            width: 25px;
+            width: 30px;
         }
 
         .main-nav {
@@ -167,7 +173,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 150px 48px 80px;
+            padding: 160px 48px 80px;
             background:
                 radial-gradient(ellipse at 80% 20%, rgba(184,150,110,0.08) 0%, transparent 60%),
                 radial-gradient(ellipse at 10% 80%, rgba(184,150,110,0.05) 0%, transparent 50%),
@@ -545,40 +551,40 @@
         }
 
         .footer-logo-top-line {
-            width: 40px;
+            width: 45px;
             height: 1px;
             background: var(--gold);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .footer-logo-name {
-            font-family: var(--font-serif);
-            font-size: 36px;
-            font-weight: 300;
-            letter-spacing: 6px;
+            font-family: var(--font-didone);
+            font-size: 42px;
+            font-weight: 400;
+            letter-spacing: 8px;
             color: #ffffff;
             line-height: 1;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             text-transform: uppercase;
         }
 
         .footer-logo-bottom {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .footer-logo-bottom-line {
-            width: 30px;
+            width: 35px;
             height: 1px;
             background: var(--gold);
         }
 
         .footer-logo-subtitle {
-            font-family: var(--font-serif);
-            font-size: 16px;
-            font-weight: 300;
-            letter-spacing: 4px;
+            font-family: var(--font-didone);
+            font-size: 18px;
+            font-weight: 350;
+            letter-spacing: 5px;
             color: #d4b896;
             text-transform: uppercase;
         }
@@ -712,8 +718,8 @@
 
         /* ── RESPONSIVE ──────────────────────────────── */
         @media (max-width: 900px) {
-            .site-header { padding: 16px 24px; }
-            .hero-section { padding: 120px 24px 60px; }
+            .site-header { padding: 20px 24px; }
+            .hero-section { padding: 140px 24px 60px; }
             .hero-content { grid-template-columns: 1fr; gap: 40px; }
             .hero-gallery { display: none; }
             .designer-quote-section { padding: 60px 24px; }
@@ -725,9 +731,9 @@
             .modal-image-container { aspect-ratio: 4/3; }
             .modal-info { padding: 32px 24px; }
             
-            .logo-name { font-size: 32px; letter-spacing: 4px; }
-            .logo-subtitle { font-size: 14px; letter-spacing: 3px; }
-            .site-header.scrolled .logo-name { font-size: 28px; }
+            .logo-name { font-size: 38px; letter-spacing: 6px; }
+            .logo-subtitle { font-size: 17px; letter-spacing: 4px; }
+            .footer-logo-name { font-size: 36px; letter-spacing: 6px; }
         }
 
         @media (max-width: 500px) {
@@ -735,16 +741,16 @@
             .footer-links { flex-direction: column; align-items: center; gap: 16px; }
             .main-nav { display: none; }
             
-            .logo-name { font-size: 24px; letter-spacing: 3px; }
-            .logo-subtitle { font-size: 12px; letter-spacing: 2px; }
-            .logo-bottom { gap: 8px; }
+            .logo-name { font-size: 30px; letter-spacing: 5px; }
+            .logo-subtitle { font-size: 15px; letter-spacing: 3px; }
+            .logo-bottom { gap: 10px; }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- HEADER — faixa preta com logo estilizado -->
+    <!-- HEADER — faixa preta com logo estilizado (fonte Didot) -->
     <header class="site-header" id="header">
         <div class="header-container">
             <div class="logo-container">
@@ -945,12 +951,4 @@
         // Header scroll
         const siteHeader = document.getElementById('header');
         if (siteHeader) {
-            window.addEventListener('scroll', () => {
-                siteHeader.classList.toggle('scrolled', window.scrollY > 60);
-            });
-        }
-
-    });
-    </script>
-</body>
-</html>
+            window.addEventListener('scroll',
