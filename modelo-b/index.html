@@ -9,13 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
-        /* =============================================
-           RESET & BASE
-        ============================================= */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
@@ -25,12 +21,9 @@
             --gold-light: #d4b896;
             --gold-dark: #8a6a46;
             --charcoal: #1a1a1a;
-            --charcoal-mid: #2e2e2e;
             --warm-gray: #6b6560;
-            --white: #ffffff;
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Montserrat', sans-serif;
-            --font-display: 'Bodoni Moda', serif;
         }
 
         html { scroll-behavior: smooth; }
@@ -45,89 +38,55 @@
         img { display: block; max-width: 100%; }
         a { text-decoration: none; color: inherit; }
 
-        /* =============================================
-           HEADER
-        ============================================= */
+        /* ── HEADER ──────────────────────────────────── */
         .site-header {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 100;
-            background: rgba(245, 240, 232, 0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(184, 150, 110, 0.2);
-            padding: 18px 48px;
-            transition: all 0.4s ease;
+            background: #111111;
+            border-bottom: 1px solid rgba(184,150,110,0.2);
+            padding: 16px 48px;
+            transition: padding 0.4s ease, box-shadow 0.4s ease;
         }
 
         .site-header.scrolled {
-            padding: 12px 48px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            padding: 10px 48px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.5);
         }
 
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            position: relative;
         }
 
-        /* Logo */
-        .brand-logo-custom {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
+        /* Logo PNG centralizado — invertido para ficar claro sobre preto */
+        .header-logo {
+            height: 58px;
+            width: auto;
+            filter: invert(1) brightness(1.1);
+            transition: height 0.4s ease, opacity 0.3s ease;
         }
 
-        .brand-logo-top-lines .line,
-        .brand-logo-bottom-container .line {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
+        .site-header.scrolled .header-logo { height: 44px; }
 
-        .logo-text {
-            font-family: var(--font-display);
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 0.3em;
-            color: var(--charcoal);
-            white-space: nowrap;
-        }
-
-        .brand-logo-bottom-container {
+        .main-nav {
+            position: absolute;
+            right: 0;
             display: flex;
             align-items: center;
-            gap: 10px;
-            width: 100%;
+            gap: 28px;
         }
-
-        .brand-logo-bottom-container .line {
-            flex: 1;
-        }
-
-        .footer-tagline {
-            font-family: var(--font-sans);
-            font-size: 9px;
-            font-weight: 400;
-            letter-spacing: 0.2em;
-            color: var(--gold);
-            white-space: nowrap;
-            text-transform: uppercase;
-        }
-
-        .main-nav { display: flex; align-items: center; gap: 32px; }
 
         .nav-link {
-            font-family: var(--font-sans);
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 500;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: var(--warm-gray);
+            color: rgba(245,240,232,0.55);
             transition: color 0.3s ease;
             position: relative;
         }
@@ -135,25 +94,21 @@
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
+            bottom: -4px; left: 0;
+            width: 0; height: 1px;
             background: var(--gold);
             transition: width 0.3s ease;
         }
 
-        .nav-link:hover { color: var(--gold-dark); }
+        .nav-link:hover { color: var(--gold-light); }
         .nav-link:hover::after { width: 100%; }
 
-        /* =============================================
-           HERO SECTION
-        ============================================= */
+        /* ── HERO ────────────────────────────────────── */
         .hero-section {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 120px 48px 80px;
+            padding: 130px 48px 80px;
             background:
                 radial-gradient(ellipse at 80% 20%, rgba(184,150,110,0.08) 0%, transparent 60%),
                 radial-gradient(ellipse at 10% 80%, rgba(184,150,110,0.05) 0%, transparent 50%),
@@ -202,7 +157,6 @@
             gap: 12px;
             background: var(--charcoal);
             color: var(--cream);
-            font-family: var(--font-sans);
             font-size: 11px;
             font-weight: 500;
             letter-spacing: 0.2em;
@@ -210,9 +164,9 @@
             padding: 16px 36px;
             border: none;
             cursor: pointer;
-            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            transition: background 0.4s ease;
         }
 
         .cta-button::before {
@@ -230,7 +184,6 @@
         .hero-gallery {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto;
             gap: 12px;
             animation: fadeUp 1s ease 0.2s both;
         }
@@ -243,36 +196,50 @@
 
         .hero-img-card:first-child {
             grid-column: 1 / -1;
-            aspect-ratio: 16/9;
+            aspect-ratio: 4/3;
         }
 
-        .hero-img-card:not(:first-child) {
-            aspect-ratio: 1/1;
-        }
+        .hero-img-card:not(:first-child) { aspect-ratio: 1/1; }
 
         .hero-img-card img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             transition: transform 0.8s ease;
         }
 
         .hero-img-card:hover img { transform: scale(1.04); }
 
-        .hero-img-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--cream-dark) 0%, #e0d6c4 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold);
-            font-size: 48px;
+        /* ── FLASH EFFECT (brilho dourado passando) ── */
+        .hero-img-card::after,
+        .catalog-card-image::after,
+        .modal-image-container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -75%;
+            width: 50%; height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent 0%,
+                rgba(255, 235, 180, 0.4) 50%,
+                transparent 100%
+            );
+            transform: skewX(-20deg);
+            pointer-events: none;
+            opacity: 0;
         }
 
-        /* =============================================
-           DESIGNER QUOTE SECTION
-        ============================================= */
+        .hero-img-card:hover::after,
+        .catalog-card-image:hover::after,
+        .modal-image-container:hover::after {
+            animation: flashSweep 0.65s ease forwards;
+        }
+
+        @keyframes flashSweep {
+            0%   { left: -75%; opacity: 1; }
+            100% { left: 130%; opacity: 0; }
+        }
+
+        /* ── DESIGNER QUOTE ──────────────────────────── */
         .designer-quote-section {
             padding: 100px 48px;
             background: var(--charcoal);
@@ -291,8 +258,7 @@
         .designer-quote-frame::after {
             content: '';
             position: absolute;
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border-color: var(--gold);
             border-style: solid;
         }
@@ -309,9 +275,8 @@
 
         .designer-name {
             display: block;
-            font-family: var(--font-display);
-            font-size: 13px;
-            font-weight: 400;
+            font-size: 11px;
+            font-weight: 500;
             letter-spacing: 0.3em;
             color: var(--gold);
             text-transform: uppercase;
@@ -327,9 +292,7 @@
             color: rgba(245,240,232,0.85);
         }
 
-        /* =============================================
-           QUOTE SECTION
-        ============================================= */
+        /* ── QUOTE SECTION ───────────────────────────── */
         .quote-section {
             padding: 80px 48px;
             text-align: center;
@@ -341,20 +304,17 @@
             font-size: clamp(22px, 3vw, 40px);
             font-weight: 300;
             font-style: italic;
-            color: var(--charcoal-mid);
+            color: var(--charcoal);
             margin-bottom: 24px;
         }
 
         .quote-line {
-            width: 80px;
-            height: 1px;
+            width: 80px; height: 1px;
             background: var(--gold);
             margin: 0 auto;
         }
 
-        /* =============================================
-           CATALOG SECTION
-        ============================================= */
+        /* ── CATALOG ─────────────────────────────────── */
         .catalog-section {
             padding: 100px 48px;
             max-width: 1300px;
@@ -381,7 +341,6 @@
             font-size: clamp(32px, 4vw, 52px);
             font-weight: 300;
             color: var(--charcoal);
-            letter-spacing: -0.01em;
         }
 
         .catalog-grid {
@@ -390,10 +349,7 @@
             gap: 32px;
         }
 
-        .catalog-card {
-            cursor: pointer;
-            group: true;
-        }
+        .catalog-card { cursor: pointer; }
 
         .catalog-card-image {
             aspect-ratio: 3/4;
@@ -404,29 +360,17 @@
         }
 
         .catalog-card-image img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .catalog-card:hover .catalog-card-image img { transform: scale(1.06); }
 
-        .catalog-card-image-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(160deg, var(--cream-dark) 0%, #d6cbb8 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold-light);
-            font-size: 56px;
-        }
-
         .card-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            background: linear-gradient(to top, rgba(26,26,26,0.7) 0%, transparent 100%);
+            background: linear-gradient(to top, rgba(26,26,26,0.65) 0%, transparent 100%);
             padding: 24px 20px 20px;
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -468,14 +412,10 @@
             line-height: 1.5;
         }
 
-        /* =============================================
-           MANIFESTO SECTION
-        ============================================= */
+        /* ── MANIFESTO ───────────────────────────────── */
         .manifesto-section {
             padding: 120px 48px;
-            background:
-                linear-gradient(135deg, rgba(184,150,110,0.06) 0%, transparent 50%),
-                var(--charcoal);
+            background: var(--charcoal);
             text-align: center;
         }
 
@@ -488,15 +428,13 @@
             color: rgba(245,240,232,0.95);
             line-height: 1.3;
             margin-bottom: 16px;
-            letter-spacing: -0.01em;
         }
 
         .manifesto-sub {
-            font-family: var(--font-sans);
             font-size: 13px;
             font-weight: 300;
             letter-spacing: 0.12em;
-            color: rgba(245,240,232,0.5);
+            color: rgba(245,240,232,0.4);
             text-transform: uppercase;
             margin-bottom: 48px;
         }
@@ -507,7 +445,6 @@
             gap: 10px;
             border: 1px solid rgba(184,150,110,0.5);
             color: var(--gold-light);
-            font-family: var(--font-sans);
             font-size: 11px;
             font-weight: 500;
             letter-spacing: 0.2em;
@@ -522,12 +459,11 @@
             color: var(--cream);
         }
 
-        /* =============================================
-           FOOTER
-        ============================================= */
+        /* ── FOOTER — mesma faixa preta do header ────── */
         .site-footer {
-            background: #111;
-            padding: 64px 48px 32px;
+            background: #111111;
+            padding: 56px 48px 28px;
+            border-top: 1px solid rgba(184,150,110,0.15);
         }
 
         .footer-container {
@@ -536,27 +472,26 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 32px;
-            padding-bottom: 48px;
+            gap: 28px;
+            padding-bottom: 40px;
             border-bottom: 1px solid rgba(255,255,255,0.06);
         }
 
-        .footer-container .logo-text { color: var(--cream); }
-        .footer-container .footer-tagline { color: var(--gold-light); }
-
-        .footer-links {
-            display: flex;
-            gap: 32px;
+        .footer-logo {
+            height: 52px;
+            width: auto;
+            filter: invert(1) brightness(1.1);
+            opacity: 0.85;
         }
+
+        .footer-links { display: flex; gap: 32px; }
 
         .footer-link {
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            color: rgba(245,240,232,0.5);
+            color: rgba(245,240,232,0.4);
             transition: color 0.3s ease;
         }
 
@@ -566,33 +501,29 @@
         .footer-bottom {
             max-width: 1200px;
             margin: 0 auto;
-            padding-top: 24px;
+            padding-top: 20px;
             text-align: center;
         }
 
         .footer-bottom p {
             font-size: 11px;
-            color: rgba(245,240,232,0.25);
+            color: rgba(245,240,232,0.2);
             letter-spacing: 0.1em;
         }
 
-        /* =============================================
-           MODAL
-        ============================================= */
+        /* ── MODAL ───────────────────────────────────── */
         .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.7);
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.78);
             z-index: 1000;
             display: none;
             align-items: center;
             justify-content: center;
             padding: 24px;
-            backdrop-filter: blur(4px);
-            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(6px);
         }
 
-        .modal-overlay.active { display: flex; }
+        .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
 
         .modal-content {
             background: var(--cream);
@@ -606,34 +537,29 @@
 
         .modal-close {
             position: absolute;
-            top: 20px; right: 20px;
+            top: 16px; right: 16px;
             width: 40px; height: 40px;
             background: var(--charcoal);
             color: var(--cream);
-            border: none;
-            cursor: pointer;
+            border: none; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            font-size: 18px;
-            z-index: 10;
+            font-size: 18px; z-index: 10;
             transition: background 0.3s ease;
         }
 
         .modal-close:hover { background: var(--gold-dark); }
 
-        .modal-body {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
+        .modal-body { display: grid; grid-template-columns: 1fr 1fr; }
 
         .modal-image-container {
             aspect-ratio: 3/4;
             overflow: hidden;
             background: var(--cream-dark);
+            position: relative;
         }
 
         .modal-image-container img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
         }
 
@@ -644,111 +570,77 @@
         }
 
         .modal-highlight {
-            font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 12px;
+            font-size: 10px; font-weight: 500;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 12px;
         }
 
         .modal-title {
             font-family: var(--font-serif);
-            font-size: 36px;
-            font-weight: 300;
-            color: var(--charcoal);
-            margin-bottom: 16px;
-            line-height: 1.1;
+            font-size: 36px; font-weight: 300;
+            color: var(--charcoal); margin-bottom: 16px; line-height: 1.1;
         }
 
         .modal-desc {
-            font-size: 13px;
-            font-weight: 300;
-            line-height: 1.7;
-            color: var(--warm-gray);
-            margin-bottom: 32px;
+            font-size: 13px; font-weight: 300;
+            line-height: 1.7; color: var(--warm-gray); margin-bottom: 32px;
         }
 
-        .modal-divider {
-            width: 40px;
-            height: 1px;
-            background: var(--gold);
-            margin-bottom: 20px;
-        }
+        .modal-divider { width: 40px; height: 1px; background: var(--gold); margin-bottom: 20px; }
 
         .modal-phrase {
             font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 15px;
-            color: var(--warm-gray);
-            margin-bottom: 40px;
-            flex: 1;
+            font-style: italic; font-size: 15px;
+            color: var(--warm-gray); margin-bottom: 40px; flex: 1;
         }
 
-        .modal-info .cta-button {
-            width: 100%;
-            justify-content: center;
-        }
+        .modal-info .cta-button { width: 100%; justify-content: center; }
 
-        /* =============================================
-           ANIMATIONS
-        ============================================= */
+        /* ── ANIMATIONS ──────────────────────────────── */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; } to { opacity: 1; }
         }
 
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* =============================================
-           RESPONSIVE
-        ============================================= */
+        /* ── RESPONSIVE ──────────────────────────────── */
         @media (max-width: 900px) {
-            .site-header { padding: 16px 24px; }
-            .hero-section { padding: 100px 24px 60px; }
-            .hero-content { grid-template-columns: 1fr; gap: 48px; }
+            .site-header { padding: 14px 24px; }
+            .hero-section { padding: 110px 24px 60px; }
+            .hero-content { grid-template-columns: 1fr; gap: 40px; }
             .hero-gallery { display: none; }
             .designer-quote-section { padding: 60px 24px; }
-            .designer-quote-frame { padding: 40px 28px; }
-            .quote-section { padding: 60px 24px; }
-            .catalog-section { padding: 60px 24px; }
+            .designer-quote-frame { padding: 36px 20px; }
+            .quote-section, .catalog-section { padding: 60px 24px; }
             .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .manifesto-section { padding: 80px 24px; }
             .modal-body { grid-template-columns: 1fr; }
             .modal-image-container { aspect-ratio: 4/3; }
-            .modal-info { padding: 32px 28px; }
+            .modal-info { padding: 32px 24px; }
         }
 
         @media (max-width: 500px) {
             .catalog-grid { grid-template-columns: 1fr; }
             .footer-links { flex-direction: column; align-items: center; gap: 16px; }
+            .main-nav { display: none; }
         }
     </style>
 </head>
 
 <body>
-    <!-- Header -->
+
+    <!-- HEADER — faixa preta, logo PNG centralizado -->
     <header class="site-header" id="header">
         <div class="header-container">
-            <div class="brand-logo-custom">
-                <div class="brand-logo-top-lines">
-                    <div class="line"></div>
-                </div>
-                <span class="logo-text">THAYS MOREIRA</span>
-                <div class="brand-logo-bottom-container">
-                    <div class="line"></div>
-                    <p class="footer-tagline">Bijoux & Design</p>
-                    <div class="line"></div>
-                </div>
-            </div>
+            <img src="assets/logo.png" alt="Thays Moreira - Bijoux & Design" class="header-logo">
             <nav class="main-nav">
                 <a href="#catalog" class="nav-link">Coleção</a>
                 <a href="https://wa.me/5511981111852" target="_blank" class="nav-link">Contato</a>
@@ -763,14 +655,9 @@
                 <div class="hero-text-area">
                     <h1>Colares que carregam <em>intenção.</em></h1>
                     <p class="micro-text">Peças autorais pensadas para compor, não competir.</p>
-                    <a href="#catalog" class="cta-button">
-                        <span>Ver catálogo completo</span>
-                    </a>
+                    <a href="#catalog" class="cta-button"><span>Ver catálogo completo</span></a>
                 </div>
-
-                <div class="hero-gallery" id="hero-gallery">
-                    <!-- Injected via JS -->
-                </div>
+                <div class="hero-gallery" id="hero-gallery"></div>
             </div>
         </section>
 
@@ -800,9 +687,7 @@
                 <span class="section-subtitle">A Coleção</span>
                 <h2>Essência em cada detalhe</h2>
             </div>
-            <div class="catalog-grid" id="catalog-grid">
-                <!-- Injected via JS -->
-            </div>
+            <div class="catalog-grid" id="catalog-grid"></div>
         </section>
 
         <!-- Manifesto -->
@@ -817,20 +702,10 @@
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- FOOTER — mesma faixa preta do header -->
     <footer class="site-footer">
         <div class="footer-container">
-            <div class="brand-logo-custom">
-                <div class="brand-logo-top-lines">
-                    <div class="line"></div>
-                </div>
-                <span class="logo-text">THAYS MOREIRA</span>
-                <div class="brand-logo-bottom-container">
-                    <div class="line"></div>
-                    <p class="footer-tagline">Bijoux & Design</p>
-                    <div class="line"></div>
-                </div>
-            </div>
+            <img src="assets/logo.png" alt="Thays Moreira" class="footer-logo">
             <div class="footer-links">
                 <a href="https://wa.me/5511981111852" target="_blank" class="footer-link">
                     <i class="ph ph-whatsapp-logo"></i> +55 11 98111-1852
@@ -848,9 +723,7 @@
     <!-- Modal -->
     <div class="modal-overlay" id="product-modal">
         <div class="modal-content">
-            <button class="modal-close" id="modal-close">
-                <i class="ph ph-x"></i>
-            </button>
+            <button class="modal-close" id="modal-close"><i class="ph ph-x"></i></button>
             <div class="modal-body">
                 <div class="modal-image-container">
                     <img src="" alt="" id="modal-image">
@@ -872,77 +745,30 @@
     <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-        // ─── DADOS DO CATÁLOGO ─────────────────────────────
-        // Substitua os src das imagens pelos caminhos reais das suas fotos
         const products = [
-            {
-                id: 1,
-                title: 'Colar Minimal Gold',
-                highlight: 'Peça Autoral',
-                desc: 'Elo dourado com acabamento fosco. Delicadeza estruturada para o dia a dia ou ocasiões especiais.',
-                img: '', // ex: 'images/colar-01.jpg'
-                icon: 'ph-circle-dashed'
-            },
-            {
-                id: 2,
-                title: 'Corrente Duo Layer',
-                highlight: 'Edição Limitada',
-                desc: 'Duas camadas em banho dourado. Comprimentos distintos que criam movimento e profundidade.',
-                img: '',
-                icon: 'ph-link'
-            },
-            {
-                id: 3,
-                title: 'Gargantilha Orgânica',
-                highlight: 'Design Exclusivo',
-                desc: 'Formas inspiradas na natureza. Peça única que se molda ao colo com leveza e intenção.',
-                img: '',
-                icon: 'ph-flower'
-            },
-            {
-                id: 4,
-                title: 'Colar Esfera',
-                highlight: 'Coleção Essência',
-                desc: 'Pequenas esferas em sequência harmoniosa. O ritmo que complementa qualquer decote.',
-                img: '',
-                icon: 'ph-dots-three-outline'
-            },
-            {
-                id: 5,
-                title: 'Choker Fio Dourado',
-                highlight: 'Peça Autoral',
-                desc: 'Fio ultra-delicado em ouro 18k. A joia que quase não se vê — e que nunca passa despercebida.',
-                img: '',
-                icon: 'ph-minus'
-            },
-            {
-                id: 6,
-                title: 'Colar Pingente Luna',
-                highlight: 'Edição Especial',
-                desc: 'Pingente em forma de meia-lua. Símbolo de ciclos, beleza e transformação constante.',
-                img: '',
-                icon: 'ph-moon'
-            }
+            { id:1, title:'Colar Pérolas & Ônix',   highlight:'Peça Autoral',      desc:'Combinação sofisticada de pérolas e pedras de ônix. Contraste que define presença.',                        img:'assets/colar-01.jpg' },
+            { id:2, title:'Colar Duo Metálico',      highlight:'Edição Limitada',   desc:'Esferas em tons dourados e escuros intercaladas com ritmo e elegância.',                                    img:'assets/colar-02.jpg' },
+            { id:3, title:'Colar Pedras do Mar',     highlight:'Coleção Essência',  desc:'Tons de verde e cinza que evocam profundidade. Peça de caráter forte e delicado.',                          img:'assets/colar-03.jpg' },
+            { id:4, title:'Colar Carmim',            highlight:'Design Exclusivo',  desc:'Vermelho intenso em pedras lapidadas. Para quem usa a cor como declaração.',                                img:'assets/colar-04.jpg' },
+            { id:5, title:'Colar Vinho & Rubi',      highlight:'Peça Autoral',      desc:'Gradiente de tons de vinho que criam profundidade e movimento ao longo do colar.',                          img:'assets/colar-05.jpg' },
+            { id:6, title:'Colar Turquesa',          highlight:'Edição Especial',   desc:'Azul turquesa vibrante em contas arredondadas. Leveza com presença marcante.',                              img:'assets/colar-06.jpg' },
+            { id:7, title:'Colar Noite & Ônix',      highlight:'Coleção Noir',      desc:'Pedras escuras com acabamento fosco. O colar para quem dispensa adornos desnecessários.',                   img:'assets/colar-07.jpg' },
+            { id:8, title:'Colar Grafite',           highlight:'Peça Autoral',      desc:'Tons de cinza e negro em harmonia. Sofisticação discreta para qualquer ocasião.',                           img:'assets/colar-08.jpg' },
+            { id:9, title:'Colar Rubi & Ônix',       highlight:'Edição Limitada',   desc:'Rubi solitário sobre fundo escuro. Um ponto de cor que transforma o conjunto.',                            img:'assets/colar-09.jpg' },
         ];
 
-        // ─── HERO GALLERY ──────────────────────────────────
+        // Hero gallery — 3 primeiras fotos
         const heroGallery = document.getElementById('hero-gallery');
         if (heroGallery) {
-            // Pega os 3 primeiros produtos para o hero
-            const heroItems = products.slice(0, 3);
-            heroItems.forEach((p, i) => {
+            products.slice(0, 3).forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'hero-img-card';
-                if (p.img) {
-                    card.innerHTML = `<img src="${p.img}" alt="${p.title}">`;
-                } else {
-                    card.innerHTML = `<div class="hero-img-placeholder"><i class="ph ${p.icon}"></i></div>`;
-                }
+                card.innerHTML = `<img src="${p.img}" alt="${p.title}" loading="lazy">`;
                 heroGallery.appendChild(card);
             });
         }
 
-        // ─── CATALOG GRID ──────────────────────────────────
+        // Catalog grid — todas as 9
         const catalogGrid = document.getElementById('catalog-grid');
         if (catalogGrid) {
             products.forEach(p => {
@@ -950,10 +776,7 @@
                 card.className = 'catalog-card';
                 card.innerHTML = `
                     <div class="catalog-card-image">
-                        ${p.img
-                            ? `<img src="${p.img}" alt="${p.title}">`
-                            : `<div class="catalog-card-image-placeholder"><i class="ph ${p.icon}"></i></div>`
-                        }
+                        <img src="${p.img}" alt="${p.title}" loading="lazy">
                         <div class="card-overlay">
                             <span class="card-overlay-text">Ver detalhes</span>
                         </div>
@@ -969,40 +792,20 @@
             });
         }
 
-        // ─── MODAL ─────────────────────────────────────────
-        const modal = document.getElementById('product-modal');
-        const modalClose = document.getElementById('modal-close');
-        const modalImage = document.getElementById('modal-image');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDesc = document.getElementById('modal-desc');
+        // Modal
+        const modal          = document.getElementById('product-modal');
+        const modalClose     = document.getElementById('modal-close');
+        const modalImage     = document.getElementById('modal-image');
+        const modalTitle     = document.getElementById('modal-title');
+        const modalDesc      = document.getElementById('modal-desc');
         const modalHighlight = document.getElementById('modal-highlight');
 
-        function openModal(product) {
-            modalHighlight.textContent = product.highlight;
-            modalTitle.textContent = product.title;
-            modalDesc.textContent = product.desc;
-            if (product.img) {
-                modalImage.src = product.img;
-                modalImage.alt = product.title;
-                modalImage.style.display = 'block';
-            } else {
-                modalImage.style.display = 'none';
-                // placeholder no modal
-                const container = modalImage.parentElement;
-                container.style.background = 'linear-gradient(160deg, #ede7d9 0%, #d6cbb8 100%)';
-                container.style.display = 'flex';
-                container.style.alignItems = 'center';
-                container.style.justifyContent = 'center';
-                container.style.fontSize = '80px';
-                container.style.color = '#d4b896';
-                if (!container.querySelector('.modal-icon-placeholder')) {
-                    const ico = document.createElement('i');
-                    ico.className = `ph ${product.icon} modal-icon-placeholder`;
-                    container.appendChild(ico);
-                } else {
-                    container.querySelector('.modal-icon-placeholder').className = `ph ${product.icon} modal-icon-placeholder`;
-                }
-            }
+        function openModal(p) {
+            modalHighlight.textContent = p.highlight;
+            modalTitle.textContent     = p.title;
+            modalDesc.textContent      = p.desc;
+            modalImage.src             = p.img;
+            modalImage.alt             = p.title;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1013,15 +816,10 @@
         }
 
         if (modalClose) modalClose.addEventListener('click', closeModal);
-        if (modal) modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
+        if (modal) modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
-
-        // ─── HEADER SCROLL ─────────────────────────────────
+        // Header scroll
         const siteHeader = document.getElementById('header');
         if (siteHeader) {
             window.addEventListener('scroll', () => {
