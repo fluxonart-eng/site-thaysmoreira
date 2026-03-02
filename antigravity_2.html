@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thays Moreira — Bijoux & Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *:before, *:after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root{
+      --gold:#c9a96e;
+      --gold-light:#e8d5b0;
+      --dark:#0a0a0a;
+      --charcoal:#121212;
+      --off-white:#f8f5f0;
+      --text-muted:#a09080;
+    }
+    html { scroll-behavior: smooth; }
+    body{
+      background: var(--dark);
+      color: var(--off-white);
+      font-family: "Montserrat", sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Cursor Custom Premium */
+    #cursor {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+    #cursor-ring {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(201, 169, 110, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease-out;
+      background: radial-gradient(circle, rgba(201, 169, 110, 0.1) 0%, transparent 70%);
+    }
+
+    /* Header */
+    header {
+      padding: 40px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      width: 100%;
+      z-index: 100;
+    }
+    .logo-container { text-align: center; flex: 1; }
+    .logo-name {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .logo-sub {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    nav ul { display: flex; list-style: none; gap: 30px; }
+    nav a {
+      text-decoration: none;
+      color: var(--off-white);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: var(--gold); }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+    }
+    .hero-content { text-align: center; z-index: 2; }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 8vw, 72px);
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    /* Galeria Interativa Flutuante */
+    #floating-experience {
+      position: relative;
+      width: 100%;
+      height: 800px;
+      background: var(--dark);
+      overflow: hidden;
+      cursor: none;
+      border-top: 1px solid rgba(201, 169, 110, 0.1);
+    }
+
+    .experience-header {
+      position: absolute;
+      top: 60px;
+      width: 100%;
+      text-align: center;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .experience-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      letter-spacing: 2px;
+      color: var(--gold-light);
+    }
+
+    .floating-item {
+      position: absolute;
+      width: 200px;
+      height: 250px;
+      will-change: transform;
+      transition: filter 0.5s ease;
+      filter: grayscale(0.3) brightness(0.8);
+    }
+
+    .floating-item:hover {
+      filter: grayscale(0) brightness(1.1);
+      z-index: 10;
+    }
+
+    .floating-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 1px solid rgba(201, 169, 110, 0.2);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    /* Brilho que passa pela imagem */
+    .floating-item::after {
+      content: '';
+      position: absolute;
+      top: -100%; left: -100%;
+      width: 50%; height: 300%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+      transform: rotate(45deg);
+      transition: all 0.7s;
+      pointer-events: none;
+    }
+
+    .floating-item:hover::after {
+      left: 150%;
+    }
+
+    footer {
+      background: #050505;
+      padding: 100px 60px;
+      text-align: center;
+      border-top: 1px solid rgba(201, 169, 110, 0.05);
+    }
+    
+    .wlti-tag {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 3px;
+      margin-top: 40px;
+      display: block;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <header>
+    <nav>
+      <ul><li><a href="#experiencia">Coleção</a></li></ul>
+    </nav>
+    <div class="logo-container">
+      <span class="logo-name">Thays Moreira</span>
+      <span class="logo-sub">Bijoux & Design</span>
+    </div>
+    <nav>
+      <ul><li><a href="#contato">Contato</a></li></ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p style="letter-spacing: 8px; color: var(--gold); text-transform: uppercase; font-size: 12px; margin-bottom: 20px;">Alta Joalheria</p>
+      <h1 class="hero-title">A leveza do luxo</h1>
+    </div>
+  </section>
+
+  <section id="floating-experience">
+    <div class="experience-header">
+      <p style="font-size: 10px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase;">Interativo</p>
+      <h2>Toque e Sinta</h2>
+    </div>
+    
+    <div class="floating-item" data-speed="0.02"><img src="assets/colar-1.jpeg" alt="Joia"></div>
+    <div class="floating-item" data-speed="0.03"><img src="assets/colar-2.jpeg" alt="Joia"></div>
+    <div class="floating-item" data-speed="0.015"><img src="assets/colar-3.jpeg" alt="Joia"></div>
+    <div class="floating-item" data-speed="0.025"><img src="assets/colar-4.jpeg" alt="Joia"></div>
+    <div class="floating-item" data-speed="0.02"><img src="assets/colar-5.jpeg" alt="Joia"></div>
+    <div class="floating-item" data-speed="0.035"><img src="assets/colar-6.jpeg" alt="Joia"></div>
+  </section>
+
+  <footer id="contato">
+    <span class="logo-name" style="font-size: 24px;">Thays Moreira</span>
+    <div style="margin: 30px 0;">
+        <a href="#" style="color: white; text-decoration: none; margin: 0 20px; font-size: 11px; letter-spacing: 2px;">INSTAGRAM</a>
+        <a href="#" style="color: white; text-decoration: none; margin: 0 20px; font-size: 11px; letter-spacing: 2px;">WHATSAPP</a>
+    </div>
+    <span class="wlti-tag">DESENVOLVIDO POR WLTI — TECHNOLOGY SOLUTIONS</span>
+  </footer>
+
+  <script>
+    // 1. Cursor Follower
+    const cursor = document.getElementById("cursor");
+    const cursorRing = document.getElementById("cursor-ring");
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + "px";
+      cursor.style.top = mouseY + "px";
+    });
+
+    // Suavidade no anel do cursor
+    function animateCursor() {
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+      cursorRing.style.left = ringX + "px";
+      cursorRing.style.top = ringY + "px";
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // 2. Lógica de Flutuação e Magnética
+    const items = document.querySelectorAll('.floating-item');
+    const container = document.getElementById('floating-experience');
+    
+    // Posições iniciais aleatórias
+    const itemData = Array.from(items).map(item => ({
+      el: item,
+      x: Math.random() * (window.innerWidth - 200),
+      y: Math.random() * (600) + 100,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      angle: Math.random() * Math.PI * 2
+    }));
+
+    function updateFloating() {
+      const rect = container.getBoundingClientRect();
+      
+      itemData.forEach(data => {
+        // Flutuação natural (senoidal)
+        data.angle += 0.01;
+        let driftX = Math.sin(data.angle) * 0.2;
+        let driftY = Math.cos(data.angle) * 0.2;
+
+        // Interação com o mouse (Repulsão suave)
+        const dx = (mouseX - (data.x + 100));
+        const dy = (mouseY - (data.y + 125 - window.innerHeight)); // Ajuste de scroll
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        
+        if (dist < 300) {
+          const force = (300 - dist) / 300;
+          data.vx -= dx * force * 0.02;
+          data.vy -= dy * force * 0.02;
+        }
+
+        // Aplicar velocidades e atrito
+        data.x += data.vx + driftX;
+        data.y += data.vy + driftY;
+        data.vx *= 0.95;
+        data.vy *= 0.95;
+
+        // Bordas (rebate suave)
+        if (data.x < 0) data.vx += 0.5;
+        if (data.x > window.innerWidth - 200) data.vx -= 0.5;
+        if (data.y < 0) data.vy += 0.5;
+        if (data.y > 700) data.vy -= 0.5;
+
+        data.el.style.transform = `translate3d(${data.x}px, ${data.y}px, 0) rotate(${data.vx * 2}deg)`;
+      });
+
+      requestAnimationFrame(updateFloating);
+    }
+
+    updateFloating();
+  </script>
+</body>
+</html>

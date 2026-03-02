@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thays Moreira — Bijoux & Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *:before, *:after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root{
+      --gold:#c9a96e;
+      --gold-light:#e8d5b0;
+      --dark:#000000; /* Preto absoluto para o palco */
+      --off-white:#f8f5f0;
+    }
+    html { scroll-behavior: smooth; }
+    body{
+      background: #050505;
+      color: var(--off-white);
+      font-family: "Montserrat", sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Cursor Custom (Luz de Lanterna) */
+    #cursor-ring {
+      position: fixed;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(201, 169, 110, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.05s ease-out;
+    }
+
+    header {
+      padding: 40px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      width: 100%;
+      z-index: 100;
+    }
+    .logo-container { text-align: center; flex: 1; }
+    .logo-name {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .logo-sub {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #888;
+    }
+    nav a { text-decoration: none; color: white; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, #111 0%, #000 100%);
+    }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: 64px; text-align: center; }
+
+    /* SEÇÃO DO PALCO (SPOTLIGHT SHOWCASE) */
+    #spotlight-stage {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: var(--dark);
+      overflow: hidden;
+      padding: 100px 60px;
+    }
+
+    .stage-header {
+      text-align: center;
+      margin-bottom: 60px;
+      z-index: 5;
+    }
+    .stage-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: #fff; }
+
+    /* Grid da "Plateia" */
+    .stage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      transition: opacity 0.5s ease;
+    }
+
+    .stage-item {
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+      border: 1px solid rgba(255,255,255,0.05);
+      background: #050505;
+    }
+
+    /* Imagem quase invisível no escuro */
+    .stage-img-wrapper {
+      position: relative;
+      padding-top: 125%;
+      filter: grayscale(1) brightness(0.1);
+      transition: all 0.5s ease;
+    }
+    
+    .stage-itemimg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    /* Efeito de Luz Suave (Hover) */
+    .stage-item:hover .stage-img-wrapper {
+      filter: grayscale(0) brightness(0.7);
+      box-shadow: 0 0 50px rgba(201, 169, 110, 0.15);
+    }
+
+    /* O PALCO CENTRAL (MODAL) */
+    #spotlight-modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      display: none; /* Escondido por padrão */
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    #spotlight-modal.active { display: flex; opacity: 1; }
+
+    .modal-content {
+      position: relative;
+      text-align: center;
+      max-width: 900px;
+      width: 90%;
+    }
+
+    /* O JATO DE LUZ (SPOTLIGHT) */
+    .spotlight-beam {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100vw; height: 100vh;
+      background: radial-gradient(circle at center, rgba(201, 169, 110, 0.3) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: -1;
+      animation: pulsateLight 3s infinite;
+    }
+
+    .modal-img {
+      max-height: 80vh;
+      max-width: 100%;
+      object-fit: contain;
+      box-shadow: 0 50px 100px rgba(0,0,0,0.8), 0 0 80px rgba(201, 169, 110, 0.2);
+      border: 2px solid var(--gold);
+      transform: scale(0.8);
+      transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+
+    #spotlight-modal.active .modal-img { transform: scale(1); }
+
+    .modal-info { margin-top: 30px; }
+    .modal-name { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: #fff; margin-bottom: 5px; }
+    .modal-price { font-size: 14px; color: var(--gold); letter-spacing: 2px; }
+
+    .close-modal {
+      position: absolute;
+      top: -50px; right: 0;
+      background: none; border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 24px; cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .close-modal:hover { color: #fff; }
+
+    @keyframes pulsateLight {
+      0% { opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+
+    footer { background: #000; padding: 100px 60px; text-align: center; }
+    .wlti-tag { font-size: 10px; color: #555; letter-spacing: 3px; margin-top: 40px; display: block; }
+  </style>
+</head>
+<body>
+
+  <div id="cursor-ring"></div>
+
+  <header>
+    <div class="logo-container">
+      <span class="logo-name">Thays Moreira</span>
+      <span class="logo-sub">Bijoux & Design</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p style="letter-spacing: 8px; color: var(--gold); text-transform: uppercase; font-size: 12px; margin-bottom: 20px;">Curadoria de Luxo</p>
+      <h1 class="hero-title">A Estrela é Você</h1>
+    </div>
+  </section>
+
+  <section id="spotlight-stage">
+    <div class="stage-header">
+      <p style="font-size: 10px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px;">Interativo</p>
+      <h2>Selecione sua Peça</h2>
+    </div>
+    
+    <div class="stage-grid" id="stage-grid">
+      <div class="stage-item" data-name="Colar Aurora" data-price="R$ 289,00" data-img="assets/colar-1.jpeg">
+        <div class="stage-img-wrapper">
+          <img class="stage-itemimg" src="assets/colar-1.jpeg" alt="Joia">
+        </div>
+      </div>
+      <div class="stage-item" data-name="Brincos Luna" data-price="R$ 156,00" data-img="assets/colar-2.jpeg">
+        <div class="stage-img-wrapper">
+          <img class="stage-itemimg" src="assets/colar-2.jpeg" alt="Joia">
+        </div>
+      </div>
+      <div class="stage-item" data-name="Pulseira Solis" data-price="R$ 212,00" data-img="assets/colar-3.jpeg">
+        <div class="stage-img-wrapper">
+          <img class="stage-itemimg" src="assets/colar-3.jpeg" alt="Joia">
+        </div>
+      </div>
+       <div class="stage-item" data-name="Colar Rubi Dourado" data-price="R$ 345,00" data-img="assets/colar-4.jpeg">
+        <div class="stage-img-wrapper">
+          <img class="stage-itemimg" src="assets/colar-4.jpeg" alt="Joia">
+        </div>
+      </div>
+       <div class="stage-item" data-name="Anel Orion" data-price="R$ 178,00" data-img="assets/colar-5.jpeg">
+        <div class="stage-img-wrapper">
+          <img class="stage-itemimg" src="assets/colar-5.jpeg" alt="Joia">
+        </div>
+      </div>
+       <div class="stage-item" data-name="Gargantilha Stella" data-price="R$ 267,00" data-img="assets/colar-6.jpeg">
+        <div class="stage-img-wrapper">
+          <img class="stage-itemimg" src="assets/colar-6.jpeg" alt="Joia">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="spotlight-modal">
+    <div class="modal-content">
+      <button class="close-modal" id="close-modal">FECHAR X</button>
+      <div class="spotlight-beam"></div> <img src="" alt="Joia em Destaque" class="modal-img" id="modal-img">
+      <div class="modal-info">
+        <h3 class="modal-name" id="modal-name"></h3>
+        <p class="modal-price" id="modal-price"></p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="logo-name" style="font-size: 24px;">Thays Moreira</span>
+    <span class="wlti-tag">DESENVOLVIDO POR WLTI — TECHNOLOGY SOLUTIONS</span>
+  </footer>
+
+  <script>
+    // 1. Cursor Follower (Luz de Lanterna suave)
+    const cursorRing = document.getElementById("cursor-ring");
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+      ringX += (mouseX - ringX) * 0.1;
+      ringY += (mouseY - ringY) * 0.1;
+      cursorRing.style.left = ringX + "px";
+      cursorRing.style.top = ringY + "px";
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // 2. Lógica do Palco e Spotlight
+    const stageItems = document.querySelectorAll('.stage-item');
+    const stageGrid = document.getElementById('stage-grid');
+    const modal = document.getElementById('spotlight-modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalName = document.getElementById('modal-name');
+    const modalPrice = document.getElementById('modal-price');
+    const closeModal = document.getElementById('close-modal');
+
+    stageItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // Pegar dados da peça clicada
+        const img = item.getAttribute('data-img');
+        const name = item.getAttribute('data-name');
+        const price = item.getAttribute('data-price');
+
+        // Preencher o palco central
+        modalImg.src = img;
+        modalName.textContent = name;
+        modalPrice.textContent = price;
+
+        // Ativar o palco (modal)
+        modal.style.display = 'flex';
+        // Pequeno delay para a animação de opacidade funcionar
+        setTimeout(() => { modal.classList.add('active'); }, 10);
+        
+        // Esconder o grid da plateia
+        stageGrid.style.opacity = '0';
+        stageGrid.style.pointerEvents = 'none';
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+      
+      // Esperar a animação de saída terminar antes de esconder
+      setTimeout(() => { 
+        modal.style.display = 'none';
+        // Reexibir o grid da plateia
+        stageGrid.style.opacity = '1';
+        stageGrid.style.pointerEvents = 'all';
+      }, 600);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Esboço Lookbook (3 peças)</title>
+  <style>
+    :root{
+      --gold:#c9a96e; --dark:#0d0d0d; --charcoal:#181818; --off:#f8f5f0; --muted:#a09080;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--dark);color:var(--off);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    .wrap{max-width:1050px;margin:0 auto;padding:40px 18px}
+    h1{font-weight:600;letter-spacing:.5px;margin-bottom:6px}
+    p{color:var(--muted);line-height:1.6;margin-bottom:18px}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    @media (max-width:900px){ .grid{grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:640px){ .grid{grid-template-columns:1fr;} }
+
+    .product-card{
+      position:relative; overflow:hidden;
+      aspect-ratio: 3/4;
+      background:var(--charcoal);
+      border:1px solid rgba(201,169,110,.14);
+      border-radius:16px;
+      cursor:pointer;
+    }
+
+    .product-img, .hover-img{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover; object-position:center;
+      transition: opacity .55s ease, transform .9s cubic-bezier(.25,.46,.45,.94), filter .6s ease;
+    }
+
+    .product-img{opacity:1; z-index:1; filter:saturate(.9) brightness(.88)}
+    .hover-img{opacity:0; z-index:2; transform:scale(1.02)}
+
+    /* Hover premium (desktop) */
+    .product-card:hover .hover-img{opacity:1; transform:scale(1.05)}
+    .product-card:hover .product-img{opacity:.15; transform:scale(1.05)}
+
+    .overlay{
+      position:absolute; inset:0; z-index:3;
+      background:linear-gradient(to top, rgba(8,8,8,.92) 0%, rgba(8,8,8,.12) 55%, transparent 70%);
+      opacity:0; transition:opacity .45s ease;
+    }
+    .product-card:hover .overlay{opacity:1}
+
+    .info{
+      position:absolute; left:0; right:0; bottom:0; z-index:4;
+      padding:18px 18px 16px;
+      transform:translateY(14px); opacity:0;
+      transition: all .45s ease .05s;
+    }
+    .product-card:hover .info{transform:translateY(0); opacity:1}
+
+    .name{font-size:20px;font-weight:650; letter-spacing:.3px}
+    .material{margin-top:6px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+    .hint{
+      position:absolute; top:12px; right:12px; z-index:5;
+      font-size:10px; letter-spacing:2.5px; text-transform:uppercase;
+      color:rgba(255,255,255,.6);
+      background:rgba(13,13,13,.35);
+      border:1px solid rgba(201,169,110,.18);
+      padding:6px 10px; border-radius:999px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Lookbook — 3 peças (esboço)</h1>
+    <p>Passe o mouse (desktop) para ver a peça na modelo. No celular, toque para alternar.</p>
+
+    <section class="grid" id="lookbook">
+      <!-- Peça 1 -->
+      <article class="product-card" data-a="colar-01.jpg" data-b="modelo-01.jpg">
+        <span class="hint">Ver na modelo</span>
+        <img class="product-img" src="colar-01.jpg" alt="Colar Aurora (foto da peça)">
+        <img class="hover-img" src="modelo-01.jpg" alt="Modelo usando Colar Aurora">
+        <div class="overlay"></div>
+        <div class="info">
+          <div class="name">Aurora</div>
+          <div class="material">Pérolas • Cristais</div>
+        </div>
+      </article>
+
+      <!-- Peça 2 -->
+      <article class="product-card" data-a="colar-02.jpg" data-b="modelo-02.jpg">
+        <span class="hint">Ver na modelo</span>
+        <img class="product-img" src="colar-02.jpg" alt="Colar Esmeralda do Mar (foto da peça)">
+        <img class="hover-img" src="modelo-02.jpg" alt="Modelo usando Colar Esmeralda do Mar">
+        <div class="overlay"></div>
+        <div class="info">
+          <div class="name">Esmeralda do Mar</div>
+          <div class="material">Turquesa • Prata</div>
+        </div>
+      </article>
+
+      <!-- Peça 3 -->
+      <article class="product-card" data-a="colar-03.jpg" data-b="modelo-03.jpg">
+        <span class="hint">Ver na modelo</span>
+        <img class="product-img" src="colar-03.jpg" alt="Colar Noite Estrelada (foto da peça)">
+        <img class="hover-img" src="modelo-03.jpg" alt="Modelo usando Colar Noite Estrelada">
+        <div class="overlay"></div>
+        <div class="info">
+          <div class="name">Noite Estrelada</div>
+          <div class="material">Lápis-lazúli • Pirita</div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    // Fallback simples para mobile (onde não existe hover):
+    // ao tocar no card, alterna a visibilidade das imagens.
+    document.querySelectorAll(".product-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const a = card.querySelector(".product-img");
+        const b = card.querySelector(".hover-img");
+        const showingB = getComputedStyle(b).opacity !== "0";
+        b.style.opacity = showingB ? "0" : "1";
+        a.style.opacity = showingB ? "1" : ".15";
+      });
+    });
+  </script>
+</body>
+</html>

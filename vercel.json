@@ -1,0 +1,7 @@
+{
+  "routes": [
+    { "src": "/modelo-a/(.*)", "dest": "/modelo-a/$1" },
+    { "src": "/modelo-b/(.*)", "dest": "/modelo-b/$1" },
+    { "src": "/", "dest": "/index.html" }
+  ]
+}

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thays Moreira — Bijoux & Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *:before, *:after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root{
+      --gold:#c9a96e;
+      --gold-light:#e8d5b0;
+      --dark:#0d0d0d;
+      --charcoal:#181818;
+      --off-white:#f8f5f0;
+      --text-muted:#a09080;
+    }
+    html { scroll-behavior: smooth; }
+    body{
+      background: var(--dark);
+      color: var(--off-white);
+      font-family: "Montserrat", sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Cursor Custom */
+    #cursor {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+    }
+    #cursor-ring {
+      position: fixed;
+      width: 35px;
+      height: 35px;
+      border: 1px solid rgba(201, 169, 110, 0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.2s ease-out;
+    }
+
+    header {
+      padding: 40px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      width: 100%;
+      z-index: 100;
+    }
+    .logo-container { text-align: center; flex: 1; }
+    .logo-name {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+    .logo-sub {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    nav ul { display: flex; list-style: none; gap: 30px; }
+    nav a {
+      text-decoration: none;
+      color: var(--off-white);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: var(--gold); }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: linear-gradient(rgba(13,13,13,0.7), rgba(13,13,13,0.7)), url('https://images.unsplash.com/photo-1515562141207-7a18b5ce3377?q=80&w=2070&auto=format&fit=crop') center/cover;
+    }
+    .hero-content { text-align: center; max-width: 800px; padding: 0 20px; }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      font-weight: 300;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1.2s forwards 0.5s;
+    }
+    .hero-subtitle {
+      font-size: 14px;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeIn 1.5s forwards 1s;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 15px 40px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: all 0.4s;
+    }
+    .hero-cta:hover { background: var(--gold); color: var(--dark); }
+
+    .section-title {
+      text-align: center;
+      padding: 100px 0 60px;
+    }
+    .section-title h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+    .section-title div {
+      width: 50px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto;
+    }
+
+    .catalog {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      padding: 0 60px 100px;
+    }
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .product-img-wrapper {
+      position: relative;
+      padding-top: 125%;
+      overflow: hidden;
+      background: var(--charcoal);
+    }
+    .product-img {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+    .product-card:hover .product-img { transform: scale(1.08); }
+    .product-info { padding: 25px 0; text-align: center; }
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    .product-price {
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    /* Estilo da Seção de Gravidade */
+    #gravity-section {
+      width: 100%;
+      height: 600px;
+      background: #080808;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(201, 169, 110, 0.1);
+      margin-top: 50px;
+    }
+    .gravity-overlay {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    footer {
+      background: var(--charcoal);
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    .footer-logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      text-align: center;
+    }
+    .footer-logo-sub {
+      font-size: 9px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: block;
+      text-align: center;
+    }
+    .footer-brand { text-align: center; }
+    .footer-brand-separator { width: 30px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 auto 20px; }
+    .footer-text { font-size: 11px; color: var(--text-muted); margin-bottom: 5px; display: block; }
+    .wlti-text { font-size: 13px; letter-spacing: 1px; color: #fff; }
+    .wlti-text span { color: var(--gold); font-size: 10px; margin-left: 5px; }
+    .footer-social { display: flex; gap: 40px; }
+    .footer-social a {
+      color: var(--off-white);
+      text-decoration: none;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .footer-social a:hover { color: var(--gold); }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 30px 20px; flex-direction: column; gap: 20px; }
+      .hero-title { font-size: 42px; }
+      .catalog { padding: 0 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#colecao">Coleção</a></li>
+        <li><a href="#sobre">A Marca</a></li>
+      </ul>
+    </nav>
+    <div class="logo-container">
+      <span class="logo-name">Thays Moreira</span>
+      <span class="logo-sub">Bijoux & Design</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#contato">Contato</a></li>
+        <li><a href="#">Loja</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-subtitle">Essência & Sofisticação</p>
+      <h1 class="hero-title">Onde o design encontra a sua raridade</h1>
+      <a href="#colecao" class="hero-cta">Explorar Catálogo</a>
+    </div>
+  </section>
+
+  <section class="section-title" id="colecao">
+    <p style="font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 15px;">Coleção Atemporal</p>
+    <h2>Peças de Destaque</h2>
+    <div></div>
+  </section>
+
+  <div class="catalog">
+    <div class="product-card">
+      <div class="product-img-wrapper">
+        <img class="product-img" src="assets/colar-1.jpeg" alt="Colar Aurora" />
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Colar Aurora</h3>
+        <p class="product-price">R$ 289,00</p>
+      </div>
+    </div>
+    <div class="product-card">
+        <div class="product-img-wrapper">
+          <img class="product-img" src="assets/colar-2.jpeg" alt="Brincos Luna" />
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Brincos Luna</h3>
+          <p class="product-price">R$ 156,00</p>
+        </div>
+    </div>
+    <div class="product-card">
+        <div class="product-img-wrapper">
+          <img class="product-img" src="assets/colar-3.jpeg" alt="Pulseira Solis" />
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Pulseira Solis</h3>
+          <p class="product-price">R$ 212,00</p>
+        </div>
+    </div>
+    <div class="product-card">
+        <div class="product-img-wrapper">
+          <img class="product-img" src="assets/colar-4.jpeg" alt="Colar Rubi Dourado" />
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Colar Rubi Dourado</h3>
+          <p class="product-price">R$ 345,00</p>
+        </div>
+    </div>
+    <div class="product-card">
+        <div class="product-img-wrapper">
+          <img class="product-img" src="assets/colar-5.jpeg" alt="Anel Orion" />
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Anel Orion</h3>
+          <p class="product-price">R$ 178,00</p>
+        </div>
+    </div>
+    <div class="product-card">
+        <div class="product-img-wrapper">
+          <img class="product-img" src="assets/colar-6.jpeg" alt="Gargantilha Stella" />
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Gargantilha Stella</h3>
+          <p class="product-price">R$ 267,00</p>
+        </div>
+    </div>
+  </div>
+
+  <section id="gravity-section">
+    <div class="gravity-overlay">
+      <p style="font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold);">Experiência</p>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 32px; color: #fff;">Toque e Sinta</h2>
+    </div>
+  </section>
+
+  <footer id="contato">
+    <div class="footer-logo-text">
+      <span class="footer-logo-name">Thays Moreira</span>
+      <span class="footer-logo-sub">Bijoux & Design</span>
+    </div>
+
+    <div class="footer-brand">
+      <div class="footer-brand-separator"></div>
+      <span class="footer-text">Desenvolvido por</span>
+      <span class="wlti-text">WLTi <span>— Solução em Tecnologia</span></span>
+    </div>
+
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram">Instagram</a>
+      <a href="https://wa.me/5511981111852" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="#" aria-label="Email">Email</a>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+
+  <script>
+    // --- SCRIPT DO CURSOR (SEU ORIGINAL) ---
+    const cursor = document.getElementById("cursor");
+    const cursorRing = document.getElementById("cursor-ring");
+
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top  = e.clientY + "px";
+      cursorRing.style.left = e.clientX + "px";
+      cursorRing.style.top  = e.clientY + "px";
+    });
+
+    const clickables = document.querySelectorAll("a, .product-card, .hero-cta");
+    clickables.forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        cursorRing.style.transform = "translate(-50%, -50%) scale(1.5)";
+        cursorRing.style.borderColor = "var(--gold)";
+        cursorRing.style.backgroundColor = "rgba(201, 169, 110, 0.1)";
+      });
+      el.addEventListener("mouseleave", () => {
+        cursorRing.style.transform = "translate(-50%, -50%) scale(1)";
+        cursorRing.style.borderColor = "rgba(201, 169, 110, 0.4)";
+        cursorRing.style.backgroundColor = "transparent";
+      });
+    });
+
+    // --- SCRIPT DE GRAVIDADE (NOVO) ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('gravity-section');
+      const { Engine, Render, Runner, Bodies, Composite, Mouse, MouseConstraint, Events } = Matter;
+
+      const engine = Engine.create();
+      const render = Render.create({
+        element: container,
+        engine: engine,
+        options: {
+          width: container.offsetWidth,
+          height: 600,
+          wireframes: false,
+          background: 'transparent',
+          pixelRatio: window.devicePixelRatio
+        }
+      });
+
+      // Caminhos das imagens baseados na sua pasta assets
+      const joiaImgs = [
+        'assets/colar-1.jpeg', 'assets/colar-2.jpeg', 'assets/colar-3.jpeg',
+        'assets/colar-4.jpeg', 'assets/colar-5.jpeg', 'assets/colar-6.jpeg'
+      ];
+
+      const stack = joiaImgs.map((src, i) => {
+        return Bodies.circle(Math.random() * container.offsetWidth, -100 * i, 50, {
+          restitution: 0.5,
+          friction: 0.1,
+          render: {
+            sprite: {
+              texture: src,
+              xScale: 0.12, // Ajuste para o tamanho da foto quadrada
+              yScale: 0.12
+            }
+          }
+        });
+      });
+
+      const ground = Bodies.rectangle(container.offsetWidth/2, 610, container.offsetWidth, 20, { isStatic: true });
+      const leftWall = Bodies.rectangle(-10, 300, 20, 600, { isStatic: true });
+      const rightWall = Bodies.rectangle(container.offsetWidth + 10, 300, 20, 600, { isStatic: true });
+
+      const mouse = Mouse.create(render.canvas);
+      const mouseConstraint = MouseConstraint.create(engine, {
+        mouse: mouse,
+        constraint: { stiffness: 0.2, render: { visible: false } }
+      });
+
+      // Importante: permite scroll na página ao passar o mouse por cima
+      mouseConstraint.mouse.element.removeEventListener("mousewheel", mouseConstraint.mouse.mousewheel);
+      mouseConstraint.mouse.element.removeEventListener("DOMMouseScroll", mouseConstraint.mouse.mousewheel);
+
+      Composite.add(engine.world, [...stack, ground, leftWall, rightWall, mouseConstraint]);
+
+      Render.run(render);
+      const runner = Runner.create();
+      Runner.run(runner, engine);
+
+      window.addEventListener('resize', () => {
+        render.canvas.width = container.offsetWidth;
+        Matter.Body.setPosition(ground, { x: container.offsetWidth/2, y: 610 });
+        Matter.Body.setPosition(rightWall, { x: container.offsetWidth + 10, y: 300 });
+      });
+    });
+  </script>
+</body>
+</html>
