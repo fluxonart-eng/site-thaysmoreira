@@ -1,7 +1,14 @@
 {
+  "version": 2,
   "routes": [
-    { "src": "/modelo-a/(.*)", "dest": "/modelo-a/$1" },
-    { "src": "/modelo-b/(.*)", "dest": "/modelo-b/$1" },
+    { "src": "/modelo-a/styles.css", "dest": "/modelo-a/styles.css" },
+    { "src": "/modelo-a/script.js", "dest": "/modelo-a/script.js" },
+    { "src": "/modelo-a/assets/(.*)", "dest": "/modelo-a/assets/$1" },
+    { "src": "/modelo-b/styles.css", "dest": "/modelo-b/styles.css" },
+    { "src": "/modelo-b/script.js", "dest": "/modelo-b/script.js" },
+    { "src": "/modelo-b/assets/(.*)", "dest": "/modelo-b/assets/$1" },
+    { "src": "/modelo-a", "dest": "/modelo-a/index.html" },
+    { "src": "/modelo-b", "dest": "/modelo-b/index.html" },
     { "src": "/", "dest": "/index.html" }
   ]
 }
